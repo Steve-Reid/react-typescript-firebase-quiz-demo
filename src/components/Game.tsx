@@ -27,6 +27,7 @@ interface GameState {
   loading: boolean;
   score: number;
   questionNumber: number;
+  done: boolean;
 }
 
 export default class Game extends Component<GameProps, GameState> {
@@ -39,6 +40,7 @@ export default class Game extends Component<GameProps, GameState> {
       loading: true,
       score: 0,
       questionNumber: 0,
+      done: false,
     };
   }
 
@@ -61,6 +63,9 @@ export default class Game extends Component<GameProps, GameState> {
   }
 
   changeQuestion = (bonus = 0): void => {
+    if (this.state.questions && this.state.questions.length === 0) {
+      return this.setState({ done: true });
+    }
     if (this.state.questions) {
       const randomQuestionIndex = Math.floor(
         Math.random() * this.state.questions.length
@@ -90,8 +95,8 @@ export default class Game extends Component<GameProps, GameState> {
   render(): JSX.Element {
     return (
       <>
-        {this.state.loading && <div id="loader" />}
-        {!this.state.loading && this.state.currentQuestion && (
+        {this.state.loading && !this.state.done && <div id="loader" />}
+        {!this.state.done && !this.state.loading && this.state.currentQuestion && (
           <>
             <HUD
               score={this.state.score}
@@ -103,6 +108,7 @@ export default class Game extends Component<GameProps, GameState> {
             />
           </>
         )}
+        {this.state.done && <h1>DONE</h1>}
       </>
     );
   }
