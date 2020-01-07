@@ -3,6 +3,7 @@ import produce from 'immer';
 import { Question } from './Question';
 import { loadQuestions } from '../utils/questionHelper';
 import { HUD } from './HUD';
+import { SaveScoreForm } from './SaveScoreForm';
 
 export type fetchedQuestion = {
   category: string;
@@ -64,7 +65,12 @@ export default class Game extends Component<GameProps, GameState> {
 
   changeQuestion = (bonus = 0): void => {
     if (this.state.questions && this.state.questions.length === 0) {
-      return this.setState({ done: true });
+      return this.setState(
+        produce(draft => {
+          draft.score = draft.score += bonus;
+          draft.done = true;
+        })
+      );
     }
     if (this.state.questions) {
       const randomQuestionIndex = Math.floor(
@@ -108,7 +114,7 @@ export default class Game extends Component<GameProps, GameState> {
             />
           </>
         )}
-        {this.state.done && <h1>DONE</h1>}
+        {this.state.done && <SaveScoreForm score={this.state.score} />}
       </>
     );
   }
