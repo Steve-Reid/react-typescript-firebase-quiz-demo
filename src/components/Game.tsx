@@ -67,7 +67,7 @@ export default class Game extends Component<GameProps, GameState> {
     if (this.state.questions && this.state.questions.length === 0) {
       return this.setState(
         produce(draft => {
-          draft.score = draft.score += bonus;
+          draft.score += bonus;
           draft.done = true;
         })
       );
@@ -91,7 +91,7 @@ export default class Game extends Component<GameProps, GameState> {
           draft.currentQuestion = currentQuestion;
           draft.loading = false;
           draft.score = draft.score += bonus;
-          draft.questionNumber = draft.questionNumber + 1;
+          draft.questionNumber += 1;
         })
       );
       console.log('Score: ', this.state.score);
@@ -99,22 +99,26 @@ export default class Game extends Component<GameProps, GameState> {
   };
 
   render(): JSX.Element {
+    const {
+      loading,
+      done,
+      score,
+      currentQuestion,
+      questionNumber,
+    } = this.state;
     return (
       <>
-        {this.state.loading && !this.state.done && <div id="loader" />}
-        {!this.state.done && !this.state.loading && this.state.currentQuestion && (
+        {loading && !done && <div id="loader" />}
+        {!done && !loading && currentQuestion && (
           <>
-            <HUD
-              score={this.state.score}
-              questionNumber={this.state.questionNumber}
-            />
+            <HUD score={score} questionNumber={questionNumber} />
             <Question
               changeQuestion={this.changeQuestion}
-              question={this.state.currentQuestion}
+              question={currentQuestion}
             />
           </>
         )}
-        {this.state.done && <SaveScoreForm score={this.state.score} />}
+        {done && <SaveScoreForm score={score} />}
       </>
     );
   }
