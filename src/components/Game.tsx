@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import produce from 'immer';
 import { Question } from './Question';
 import { loadQuestions } from '../utils/questionHelper';
@@ -20,7 +21,7 @@ export type QuestionType = {
   question: string;
 };
 
-interface GameProps {}
+interface GameProps extends RouteComponentProps<any> {}
 
 interface GameState {
   questions: QuestionType[] | null;
@@ -94,6 +95,10 @@ export default class Game extends Component<GameProps, GameState> {
     }
   };
 
+  scoreSaved = (): void => {
+    this.props.history.push('/');
+  };
+
   render(): JSX.Element {
     const {
       loading,
@@ -114,7 +119,7 @@ export default class Game extends Component<GameProps, GameState> {
             />
           </>
         )}
-        {done && <SaveScoreForm score={score} />}
+        {done && <SaveScoreForm score={score} scoreSaved={this.scoreSaved} />}
       </>
     );
   }

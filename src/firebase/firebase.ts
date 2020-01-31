@@ -1,4 +1,7 @@
 import * as app from 'firebase/app';
+// Import the other firebase modules for their SIDE-EFFECTS! These imports will augment
+// the App module and provide the type-definition for the .database() method.
+import 'firebase/database';
 
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,

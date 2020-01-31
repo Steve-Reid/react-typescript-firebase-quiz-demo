@@ -8,10 +8,12 @@ import { useFirebase } from '../firebase/firebaseContext';
 
 interface SaveScoreFormProps {
   score: number;
+  scoreSaved: () => void;
 }
 
 export const SaveScoreForm: React.FC<SaveScoreFormProps> = ({
   score,
+  scoreSaved,
 }: SaveScoreFormProps) => {
   const firebase = useFirebase();
   console.log('firebase:', firebase);
@@ -31,7 +33,12 @@ export const SaveScoreForm: React.FC<SaveScoreFormProps> = ({
             score,
           };
           // make async call
-          console.log('record', record);
+          console.log(record);
+
+          firebase.scores().push(record, () => {
+            console.log('Score saved!');
+            scoreSaved();
+          });
           setSubmitting(false);
         }}
       >
