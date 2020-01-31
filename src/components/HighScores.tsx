@@ -29,7 +29,7 @@ export const HighScores: React.FC<HighScoresProps> = () => {
       setScores(sortedScores);
       setLoading(false);
     });
-  });
+  }, [firebase]);
 
   return (
     <>

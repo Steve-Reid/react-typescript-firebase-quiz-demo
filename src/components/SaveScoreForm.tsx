@@ -16,7 +16,6 @@ export const SaveScoreForm: React.FC<SaveScoreFormProps> = ({
   scoreSaved,
 }: SaveScoreFormProps) => {
   const firebase = useFirebase();
-  console.log('firebase:', firebase);
   return (
     <>
       <h1>Score: {score}</h1>
@@ -27,16 +26,12 @@ export const SaveScoreForm: React.FC<SaveScoreFormProps> = ({
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }): void => {
           setSubmitting(true);
-          console.log('Submitting');
           const record = {
             name: values.username,
             score,
           };
-          // make async call
-          console.log(record);
 
           firebase.scores().push(record, () => {
-            console.log('Score saved!');
             scoreSaved();
           });
           setSubmitting(false);
