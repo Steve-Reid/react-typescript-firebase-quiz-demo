@@ -48,7 +48,6 @@ export default class Game extends Component<GameProps, GameState> {
   async componentDidMount(): Promise<void> {
     try {
       const questions = await loadQuestions();
-      console.log('TCL: Game -> questions', questions);
       this.setState(
         {
           questions,
@@ -60,7 +59,6 @@ export default class Game extends Component<GameProps, GameState> {
     } catch (err) {
       console.error(err);
     }
-    console.log('this.state.questions: ', this.state.questions);
   }
 
   changeQuestion = (bonus = 0): void => {
@@ -83,7 +81,6 @@ export default class Game extends Component<GameProps, GameState> {
       // remove currentQuestion from remaining questions
       remainingQuestions.splice(randomQuestionIndex, 1);
       // set remaining questions to state
-      console.log('remainingQuestions: ', remainingQuestions);
 
       this.setState(
         produce(draft => {
@@ -94,7 +91,6 @@ export default class Game extends Component<GameProps, GameState> {
           draft.questionNumber += 1;
         })
       );
-      console.log('Score: ', this.state.score);
     }
   };
 
