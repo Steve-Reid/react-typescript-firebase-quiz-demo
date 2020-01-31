@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 
 import { validationSchema } from '../utils/validationSchema';
+import { useFirebase } from '../firebase/firebaseContext';
 
 interface SaveScoreFormProps {
   score: number;
@@ -12,6 +13,8 @@ interface SaveScoreFormProps {
 export const SaveScoreForm: React.FC<SaveScoreFormProps> = ({
   score,
 }: SaveScoreFormProps) => {
+  const firebase = useFirebase();
+  console.log('firebase:', firebase);
   return (
     <>
       <h1>Score: {score}</h1>
