@@ -1,4 +1,39 @@
+# Trivia Quiz App
+
+This is a React Typescript client which connects to the Open Trivia API and a Firebase database.
+
+## Features
+
+- Display questions with a randomly sorted set of multiple choice answers.
+- Keep a running score based on correct answers.
+- Save score to a Firebase database.
+- Retrieve and display a list of the top high scorers
+
+## Libraries used
+
+- [React](https://reactjs.org/)
+- [React Router](https://reacttraining.com/react-router/web/guides/quick-start)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Formik-2](https://jaredpalmer.com/formik)
+- [Yup](https://github.com/jquense/yup)
+- [Open Tivia Database](https://opentdb.com/)
+- [Firebase Real-time Database](https://firebase.google.com/)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Usage
+
+After cloning the project, a .env will need to be included in the project root containing the following variables, the values of which can be retrieved form the real-time database project created in your own Firebase account.
+
+```
+REACT_APP_FIREBASE_API_KEY=
+REACT_APP_FIREBASE_AUTH_DOMAIN=
+REACT_APP_FIREBASE_DATABASE_URL=
+REACT_APP_FIREBASE_PROJECT_ID=
+REACT_APP_FIREBASE_STORAGE_BUCKET=
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=
+```
+A demonstration version can be viewed here: 
 
 ## Available Scripts
 
